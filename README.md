@@ -46,9 +46,11 @@ crw-rw-rw-+ 1 root plugdev 189, 25 Mar  8 06:36 /dev/bus/usb/001/026
 
 
 
-### 0. Setup
+### 1. STM Dev
 
-connect and verify
-```
-lsusb | grep -i stm
+ OpenOCD is a service which forwards debug information from the ITM channel to a file, itm.txt, as such it runs forever and does not return to the terminal prompt.
+
+ connect and verify
+```bash
+openocd -f interface/stlink.cfg -f target/stm32f3x.cfg
 ```
