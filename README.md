@@ -136,13 +136,21 @@ A Cortex-M4F core that includes a single precision FPU
 
 
 
-### 4. 
+### 4. Build and deploy to Flash
 
 Before cross compiling you have to download a pre-compiled version of the standard library for your target.
 ```bash
 rustup target add thumbv7em-none-eabihf
 ```
 
+build for specific target arch
 ```bash
 cargo build --target thumbv7em-none-eabihf
 ```
+
+Optional to view elf file. Note: Be sure to compile this crate without optimizations
+```bash
+cargo readobj --target thumbv7em-none-eabihf --bin ignition_9 -- --file-header
+# readelf -h target/thumbv7em-none-eabihf/debug/ignition_9 # alternative
+```
+
