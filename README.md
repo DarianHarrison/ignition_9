@@ -75,3 +75,63 @@ Info : stm32f3x.cpu: hardware has 6 breakpoints, 4 watchpoints
 Info : starting gdb server for stm32f3x.cpu on 3333
 Info : Listening on port 3333 for gdb connections
 ```
+
+
+### 2. Know your Hardware
+
+
+
+ 0. What is the ARM core ?
+
+ The "Cortex-M" family of ARM designs are mainly used as the core in microcontrollers
+ The Cortex-M4 is designed for low cost and low power usage
+ The Cortex-M7 is higher cost, but with more features and performance.
+
+ 1. Does the ARM core include an FPU
+ 
+ Cortex-M4F and Cortex-M7F cores do
+
+ 2. How much Flash & location ?
+
+ 3. How much RAM & location ?
+
+ 
+
+ In this section we'll be using our reference hardware, the STM32F3DISCOVERY. This board contains an STM32F303VCT6 microcontroller. This microcontroller has:
+```
+A Cortex-M4F core that includes a single precision FPU
+
+256 KiB of Flash located at address 0x0800_0000.
+
+40 KiB of RAM located at address 0x2000_0000. (There's another RAM region but for simplicity we'll ignore it).
+```
+
+
+
+
+
+### 2. Know your Hardware
+
+
+ Have Rust installed and updated
+```bash
+rustup default stable
+rustup update ; rustc --version --verbose
+```
+
+ To add cross compilation support for the ARM Cortex-M architectures choose a compilation target. For the STM32F3DISCOVERY board use the ```thumbv7em-none-eabihf``` target.
+```bash
+rustup target add thumbv7em-none-eabihf
+```
+
+ cargo-binutils
+```bash
+cargo install cargo-binutils
+rustup component add llvm-tools-preview
+```
+
+ cargo-generate
+```bash
+sudo apt install -y libssl-dev pkg-config # prereqs for cargo-generate
+cargo install cargo-generate
+```
