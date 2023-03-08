@@ -16,6 +16,9 @@ set style sources off
 # set backtrace limit to not have infinite backtrace loops
 set backtrace limit 32
 
+# dont ask for confirmation prior to quit
+set confirm off
+
 # Initialize monitoring so iprintln! macro output
 # is sent from the itm port to itm.txt
 # 8000000 must match the core clock frequency
@@ -45,3 +48,9 @@ continue
 
 # Step from the trampoline code in entry into main
 step
+
+# Continue running until we hit the main breakpoint
+continue
+
+
+# quit

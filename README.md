@@ -178,6 +178,12 @@ quit
 ```
 
 Scripted
+
+make sure you have debug on first terminal
 ```bash
-gdb-multiarch -x openocd.gdb target/thumbv7em-none-eabihf/debug/examples/hello
-``
+opencd
+```
+on second terminal
+```bash
+cargo clean ; cargo build ; cargo run
+```
