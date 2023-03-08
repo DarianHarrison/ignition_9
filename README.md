@@ -1,6 +1,32 @@
 # ignition_9
 
-### 0. Setup
+### 0. Prereqs
+
+ Have Rust installed and updated
+```bash
+rustup default stable
+rustup update ; rustc --version --verbose
+```
+
+ To add cross compilation support for the ARM Cortex-M architectures choose a compilation target. For the STM32F3DISCOVERY board use the ```thumbv7em-none-eabihf``` target.
+```bash
+rustup target add thumbv7em-none-eabihf
+```
+
+ cargo-binutils
+```bash
+cargo install cargo-binutils
+rustup component add llvm-tools-preview
+```
+
+ (optional) cargo-generate
+```bash
+sudo apt install -y libssl-dev pkg-config # prereqs for cargo-generate
+cargo install cargo-generate
+```
+
+
+### 1. Setup
 
  0. tools 
 ```bash
@@ -41,7 +67,7 @@ crw-rw-rw-+ 1 root plugdev 189, 25 Mar  8 06:36 /dev/bus/usb/001/026
 
 
 
-### 1. Debug Setup
+### 2. Debug Setup
 
  OpenOCD is a service which forwards debug information from the ITM channel to a file, itm.txt, as such it runs forever and does not return to the terminal prompt.
 
@@ -77,7 +103,7 @@ Info : Listening on port 3333 for gdb connections
 ```
 
 
-### 2. Know your Hardware
+### 3. Know your Hardware
 
 
 
@@ -110,28 +136,13 @@ A Cortex-M4F core that includes a single precision FPU
 
 
 
-### 2. Know your Hardware
+### 4. 
 
-
- Have Rust installed and updated
-```bash
-rustup default stable
-rustup update ; rustc --version --verbose
-```
-
- To add cross compilation support for the ARM Cortex-M architectures choose a compilation target. For the STM32F3DISCOVERY board use the ```thumbv7em-none-eabihf``` target.
+Before cross compiling you have to download a pre-compiled version of the standard library for your target.
 ```bash
 rustup target add thumbv7em-none-eabihf
 ```
 
- cargo-binutils
 ```bash
-cargo install cargo-binutils
-rustup component add llvm-tools-preview
-```
-
- cargo-generate
-```bash
-sudo apt install -y libssl-dev pkg-config # prereqs for cargo-generate
-cargo install cargo-generate
+cargo build --target thumbv7em-none-eabihf
 ```
