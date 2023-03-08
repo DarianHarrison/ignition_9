@@ -154,3 +154,30 @@ cargo readobj --target thumbv7em-none-eabihf --bin ignition_9 -- --file-header
 # readelf -h target/thumbv7em-none-eabihf/debug/ignition_9 # alternative
 ```
 
+manual
+
+ first terminal
+```bash
+openocd
+```
+
+ second terminal
+```bash
+gdb-multiarch -q target/thumbv7em-none-eabihf/debug/ignition_9
+```
+```gdb
+target extended-remote :3333
+load
+monitor arm semihosting enable
+break main
+continue
+step
+next
+set confirm off
+quit
+```
+
+Scripted
+```bash
+gdb-multiarch -x openocd.gdb target/thumbv7em-none-eabihf/debug/examples/hello
+``
