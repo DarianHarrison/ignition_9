@@ -74,6 +74,4 @@ Info : Target voltage: 2.908703
 Info : stm32f3x.cpu: hardware has 6 breakpoints, 4 watchpoints
 Info : starting gdb server for stm32f3x.cpu on 3333
 Info : Listening on port 3333 for gdb connections
-^Cshutdown command invoked
-
 ```
