@@ -29,7 +29,7 @@ monitor tpiu config internal itm.txt uart off 8000000
 monitor itm port 0 on
 
 # #
-# monitor arm semihosting enable
+monitor arm semihosting enable
 
 # Set a breakpoint at main, aka entry
 break main
@@ -41,7 +41,7 @@ break DefaultHandler
 break HardFault
 
 # #
-# break rust_begin_unwind
+break rust_begin_unwind
 
 # Continue running until we hit the main breakpoint
 continue
@@ -50,7 +50,7 @@ continue
 step
 
 # Continue running until we hit the main breakpoint
-continue
+# continue
 
 
 # quit

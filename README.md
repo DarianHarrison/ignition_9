@@ -136,9 +136,9 @@ A Cortex-M4F core that includes a single precision FPU
 
 
 
-### 4. Build and deploy to Flash
+### 4. Build and deploy to Flash and Run
 
-Before cross compiling you have to download a pre-compiled version of the standard library for your target.
+0. Before cross compiling you have to download a pre-compiled version of the standard library for your target.
 ```bash
 rustup target add thumbv7em-none-eabihf
 ```
@@ -154,30 +154,38 @@ cargo readobj --target thumbv7em-none-eabihf --bin ignition_9 -- --file-header
 # readelf -h target/thumbv7em-none-eabihf/debug/ignition_9 # alternative
 ```
 
-manual
+ 1. Manual
 
  first terminal
 ```bash
 openocd
 ```
-
  second terminal
 ```bash
 gdb-multiarch -q target/thumbv7em-none-eabihf/debug/ignition_9
 ```
 ```gdb
-target extended-remote :3333
+target remote :3333
 load
+set print asm-demangle on
+set print pretty on
+set style sources off
+set backtrace limit 32
+set confirm off
+monitor tpiu config internal itm.txt uart off 8000000
+monitor itm port 0 on
 monitor arm semihosting enable
 break main
+break DefaultHandler
+break HardFault
+break rust_begin_unwind
 continue
 step
-next
-set confirm off
+continue
 quit
 ```
 
-Scripted
+ 2. Scripted
 
 make sure you have debug on first terminal
 ```bash
@@ -185,5 +193,6 @@ opencd
 ```
 on second terminal
 ```bash
-cargo clean ; cargo build ; cargo run
+# cargo clean # optional
+cargo build ; cargo run
 ```
