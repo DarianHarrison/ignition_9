@@ -30,7 +30,7 @@ cargo install cargo-generate
 
  0. tools 
 ```bash
-sudo apt-get install -y gdb-multiarch minicom
+sudo apt-get install -y gdb-multiarch minicom openocd
 ```
 
  1.  udev rules
